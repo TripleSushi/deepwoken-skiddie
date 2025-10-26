@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 local Main = {}
 
 local playersService = game:GetService("Players")
@@ -11,6 +10,3 @@ end
 
 
 return Main
-=======
--- random
->>>>>>> 7689d71e60f7eac7f79e7989a73e3199145eb8a6
