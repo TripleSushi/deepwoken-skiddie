@@ -27,6 +27,11 @@ local Window = Library:CreateWindow({
 local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
+
+    --Creates a new tab titled Auto
+     Auto = Window:AddTab('Auto'), 
+
+     --Creates a new tab titled UI Settings
     ['UI Settings'] = Window:AddTab('UI Settings'),
 
     --Creates a new tab titled Auto
