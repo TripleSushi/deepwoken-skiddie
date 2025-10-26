@@ -39,6 +39,60 @@ local Tabs = {
 -- except Tabboxes you have to call the functions on a tab (Tabbox:AddTab(name))
 local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Groupbox')
 
+-- Enmity stuff, change whatever you want.
+local EnmityBox = Tabs.Auto:AddLeftGroupbox("Tweens")
+
+EnmityBox:AddInput('KillerID', {
+    Default = ' ',
+    Numeric = true,
+    Finished = true,
+    Text = 'KillerID',
+    Tooltip = 'Enter the user ID  of the placerholder'
+})
+
+-- Buttons for the tweening stuff related.
+EnmityBox:AddButton({
+    Text = 'Hide Spot',
+    Func = function()
+        Library:Notify('Tweening to: Hide Spot')
+    end,
+    Tooltip = 'Tweens all the alts to the hiding coords'
+})
+
+EnmityBox:AddButton({
+    Text = 'Elevator',
+    Func = function()
+        Library:Notify('Tweening to: Elevator')
+    end,
+    Tooltip = 'Tweens all the alts to the elevator coords'
+})
+
+EnmityBox:AddButton({
+    Text = 'Killers Coords',
+    Func = function()
+        Library:Notify('Tweening to: Killers Coords')
+    end,
+    Tooltip = 'Tweens all the alts to the current killers coords'
+})
+
+-- Buttons for remotes related stuff
+EnmityBox:AddButton({
+    Text = 'Lean Back',
+    Func = function()
+        Library:Notify("Fired 'Lean Back' emote")
+
+    end,
+    Tooltip = 'Perform the Lean Back emote'
+})
+
+EnmityBox:AddButton({
+    Text = 'Return To Menu',
+    Func = function()
+        Library:Notify("Returning to menu")
+
+    end,
+    Tooltip = 'Self-explanatory'
+})
 -- We can also get our Main tab via the following code:
 -- local LeftGroupBox = Window.Tabs.Main:AddLeftGroupbox('Groupbox')
 
