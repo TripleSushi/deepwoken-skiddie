@@ -28,6 +28,9 @@ local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
     ['UI Settings'] = Window:AddTab('UI Settings'),
+
+     Auto = Window:AddTab('Auto'),
+    ['UI Settings'] = Window:AddTab('UI Settings'),
 }
 
 -- Groupbox and Tabbox inherit the same functions
