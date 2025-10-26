@@ -26,12 +26,12 @@ local Window = Library:CreateWindow({
 -- You do not have to set your tabs & groups up this way, just a prefrence.
 local Tabs = {
     -- Creates a new tab titled Main
-    Main = Window:AddTab('Main'),
+    ['Main'] = Window:AddTab('Main'),
 
     --Creates a new tab titled Auto
-     Auto = Window:AddTab('Auto'), 
+    ['Auto'] = Window:AddTab('Auto'), 
 
-     --Creates a new tab titled UI Settings
+    --Creates a new tab titled UI Settings
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
 
