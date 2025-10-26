@@ -33,9 +33,6 @@ local Tabs = {
 
      --Creates a new tab titled UI Settings
     ['UI Settings'] = Window:AddTab('UI Settings'),
-
-    --Creates a new tab titled Auto
-     Auto = Window:AddTab('Auto'),
 }
 
 -- Groupbox and Tabbox inherit the same functions
