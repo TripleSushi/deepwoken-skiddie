@@ -1,7 +1,8 @@
-local Repo = "https://github.com/TripleSushi/deepwoken-skiddie"
+local Repo = "https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main"
 
 local Client = loadstring(game:HttpGet(Repo .. "/modules/client.lua"))()
 local KeyHandler = loadstring(game:HttpGet(Repo .. "/modules/kh.lua"))()
+local Main = loadstring(game:HttpGet(Repo .. "/main.lua"))()
 
 Client.init()
 KeyHandler.init()
@@ -13,5 +14,6 @@ end
 return {
     Client = Client,
     KeyHandler = KeyHandler,
-    GetKey = getKey
+    GetKey = getKey,
+    Main = Main
 }
