@@ -1,7 +1,7 @@
 local gui = {}
 -- Credits to Inoria and whoever wrote the example.
 local Repo = "https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main"
-local Library = loadstring(game:HttpGet(Repo .. '/library.lua'))()
+local Library = loadstring(game:HttpGet(Repo .. '/modules/library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(Repo .. '/addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(Repo .. '/addons/SaveManager.lua'))()
 
