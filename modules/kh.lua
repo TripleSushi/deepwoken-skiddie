@@ -7,7 +7,11 @@ local remoteTable = nil
 local randomTable = nil
 
 ---@module Utility.Logger
-local Logger = require("Utility/Logger")
+local Logger = {
+    warn = function(msg, ...)
+        warn(string.format(msg, ...))
+    end
+}
 
 -- Hash cache.
 local hashCache = {}
