@@ -112,13 +112,14 @@ EnmityBox:AddButton({
 EnmityBox:AddToggle('altListener', {
     Text = 'Alt listener',
     Default = false,
-    Tooltip = 'Self-explanatory',
+    Tooltip = 'Self-explanatory'
 })
 
 -- Handle for config loading 
 Toggles.altListener:OnChanged(function()
     if Toggles.altListener.Value then
         Library:Notify("Started listening to file changes")
+        Enmity.listener()
     else
         Library:Notify("Stopped listening to file changes")
         Enmity.stopListener()
