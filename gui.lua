@@ -111,7 +111,7 @@ EnmityBox:AddButton({
 EnmityBox:AddButton({
     Text = 'Alt listener',
     Func = function()
-        Library:Notify("Stopped listening changes in the file")
+        Library:Notify("Starting listening to changes in the file")
         Enmity.listener()
     end,
     Tooltip = 'Self-explanatory'
