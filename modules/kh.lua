@@ -263,16 +263,11 @@ end
 ---Search through 'getgc' for data.
 local function searchForKeyHandlerData()
 	for _, value in next, getgc(true) do
-		if not searchForRandomTable(value) then
-			continue
-		end
-
-		if not searchForRemoteTable(value) then
-			continue
-		end
-
-		return true
+		searchForRandomTable(value)
+		searchForRemoteTable(value)
 	end
+	
+	return randomTable ~= nil and remoteTable ~= nil
 end
 
 ---Initialize the KeyHandler module.
