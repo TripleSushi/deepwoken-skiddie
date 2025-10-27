@@ -113,6 +113,7 @@ local function execute(file)
     elseif command == commands.emote then
         event.Gesture:FireServer("Lean Back")
     elseif command == commands.menu then
+        enmity.write(commands.afk)
         event.ReturnToMenu:FireServer()
     end
 end
@@ -159,6 +160,7 @@ function enmity.listener()
 end
 
 function enmity.stopListener()
+    enmity.write(commands.afk)
     listener = false
 end
 return enmity
