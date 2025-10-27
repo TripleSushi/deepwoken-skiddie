@@ -6,6 +6,7 @@ local event = game:GetService("ReplicatedStorage").Requests
 
 local path = "orders.json"
 local lastCommand = 0
+local listener = false
 
 --Command values
 local commands = {
@@ -135,8 +136,10 @@ function enmity.menu()
 end
 -- The actual listener
 function enmity.listener()
-    task.spawn(function ()
-        while true do
+    if listener then return end
+    listener = true
+    task.spawn(function()
+        while listener do
             task.wait(0.5)
 
             local data = read()
@@ -145,5 +148,9 @@ function enmity.listener()
             end
         end
     end)
+end
+
+function enmity.stopListener()
+    listener = false
 end
 return enmity

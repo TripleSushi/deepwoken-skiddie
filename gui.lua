@@ -31,7 +31,7 @@ local Tabs = {
     ['Main'] = Window:AddTab('Main'),
 
     --Creates a new tab titled Auto
-    ['Auto'] = Window:AddTab('Auto'), 
+    ['Auto'] = Window:AddTab('Auto'),
 
     --Creates a new tab titled UI Settings
     ['UI Settings'] = Window:AddTab('UI Settings'),
@@ -108,13 +108,20 @@ EnmityBox:AddButton({
     Tooltip = 'Self-explanatory'
 })
 
-EnmityBox:AddButton({
+-- Toggle for the alt listener
+EnmityBox:AddToggle('altListener', {
     Text = 'Alt listener',
-    Func = function()
-        Library:Notify("Starting listening to changes in the file")
-        Enmity.listener()
-    end,
-    Tooltip = 'Self-explanatory'
+    Default = false,
+    Tooltip = 'Self-explanatory',
+    Callback = function(Value)
+        if Value then
+           Library:Notify("Started listening to file changes")
+           Enmity.listener()
+        else
+            Library:Notify("Stopped listening to file changes")
+            Enmity.stopListener()
+        end
+    end
 })
 -- We can also get our Main tab via the following code:
 -- local LeftGroupBox = Window.Tabs.Main:AddLeftGroupbox('Groupbox')
