@@ -5,20 +5,24 @@ local KeyHandler = loadstring(game:HttpGet(Repo .. "/modules/kh.lua"))()
 local Main = loadstring(game:HttpGet(Repo .. "/main.lua"))()
 local Gui = loadstring(game:HttpGet(Repo .. "/gui.lua"))()
 
+local _client = false
 local success1, err1 = pcall(function()
-    Client.init()
-end)
-
-local success2, err2 = pcall(function()
-    KeyHandler.init()
+    _client = Client.init()
 end)
 
 if not success1 then
-    warn("Client init failed:", err1)
+    warn("Client failed:", err1)
+    return
 end
 
+local kh = false
+local success2, err2 = pcall(function()
+    kh = KeyHandler.init()
+end)
+
 if not success2 then
-    warn("KeyHandler init failed:", err2)
+    warn("KeyHandler failed:", err2)
+    return
 end
 
 local function getKey(name)
