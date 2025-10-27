@@ -9,7 +9,7 @@ Client.init()
 KeyHandler.init()
 
 local function getKey(name)
-    return KeyHandler.getKey(name)
+    return KeyHandler.getRemote(name)
 end
 
 return {
