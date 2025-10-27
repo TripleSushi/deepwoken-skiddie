@@ -3,11 +3,14 @@ local enmity = {}
 local tweenService = game:GetService("TweenService")
 local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
-local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/noclip.lua'))()
+local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/7edit/features/noclip.lua'))()
 
 local path = "orders.json"
 local lastCommand = 0
 local listener = false
+
+-- Track unsafe confirmations for movement
+local unsafeConfirm = false
 
 --Command values
 local commands = {
@@ -31,12 +34,12 @@ end
 
 -- Coords 
 local positions = {
-    depths1 = Vector3.new(3039.7001953125, -2352.10009765625, 1589.76611328125), -- Hide coords
-    depths2 = Vector3.new(2968.79345703125, -2264.3369140625, 1574.746826171875), -- Elevator coords
-    cathedral = Vector3.new(2979.63818359375, -996.689697265625, 1774.434814453125) -- Cathedral coords
+    depths1 = Vector3.new(3039.7001953125, -2352.10009765625, 1589.76611328125),
+    depths2 = Vector3.new(2968.79345703125, -2264.3369140625, 1574.746826171875),
+    cathedral = Vector3.new(2979.63818359375, -996.689697265625, 1774.434814453125)
 }
 
--- Function to make the tweens, dont mind it
+-- Function to make the tweens
 local function mainTween(player, target)
     local character = player.Character
     local hrp = character.HumanoidRootPart
@@ -58,49 +61,85 @@ local function mainTween(player, target)
     noclip.disabled(character)
 end
 
--- File related stuff for command listener 
+-- Nearby player check
+local function isAreaSafe(range)
+    local player = playersService.LocalPlayer
+    local character = player.Character
+    if not character or not character:FindFirstChild("HumanoidRootPart") then
+        return true
+    end
+
+    local hrp = character.HumanoidRootPart
+    for _, other in ipairs(playersService:GetPlayers()) do
+        if other ~= player then
+            local otherChar = other.Character
+            if otherChar and otherChar:FindFirstChild("HumanoidRootPart") then
+                local dist = (hrp.Position - otherChar.HumanoidRootPart.Position).Magnitude
+                if dist <= range then
+                    return false
+                end
+            end
+        end
+    end
+    return true
+end
+
+-- File related
 function enmity.write(command)
     local KillerID = getKillerID()
     if not KillerID then warn("No killer ID was found") return false end
 
-    local data = {
-        command = command
-    }
-
+    local data = { command = command }
     local file = game:GetService("HttpService"):JSONEncode(data)
     writefile(path, file)
 end
 
 local function read()
     if not isfile(path) then
-        writefile(path, game:GetService("HttpService"):JSONEncode({
-            command = 0
-        }))
+        writefile(path, game:GetService("HttpService"):JSONEncode({ command = 0 }))
         return nil
     else
         local content = readfile(path)
         if not content then return nil end
-
         return game:GetService("HttpService"):JSONDecode(content)
     end
 end
 
--- Main logic of the tweening
+-- Main logic
 local function execute(file)
     if not file then return end
 
     local player = playersService.LocalPlayer
     local killerID = getKillerID()
+    if not killerID then return end
     local killerHrp = playersService:GetPlayerByUserId(killerID).Character.HumanoidRootPart
     local command = file.command
 
-    if not killerID then return end
-
     if killerID == player.UserId then return end
-
     if command == lastCommand then return end
     lastCommand = command
 
+    -- SAFETY CHECK BEFORE MOVEMENT (range now 275 studs)
+    if not isAreaSafe(275) then
+        if not unsafeConfirm then
+            unsafeConfirm = true
+            warn("[FOR ENMITY] Unsafe area detected — click again to confirm movement.")
+            if Library then
+                Library:Notify("⚠️ Unsafe area detected — click again to confirm movement.")
+            end
+            return
+        else
+            unsafeConfirm = false
+            warn("[FOR ENMITY] Confirmed movement despite unsafe area.")
+            if Library then
+                Library:Notify("Confirmed movement despite unsafe area.")
+            end
+        end
+    else
+        unsafeConfirm = false
+    end
+
+    -- Command execution
     if command == commands.hide then
         mainTween(player, positions.depths1)
     elseif command == commands.elevator then
@@ -117,38 +156,21 @@ local function execute(file)
     end
 end
 
--- Attaching the methods to use them in the gui
-function enmity.hide()
-    enmity.write(commands.hide)
-end
+-- GUI shortcuts
+function enmity.hide() enmity.write(commands.hide) end
+function enmity.elevator() enmity.write(commands.elevator) end
+function enmity.killerPos() enmity.write(commands.killerPos) end
+function enmity.cathedral() enmity.write(commands.cathedral) end
+function enmity.emote() enmity.write(commands.emote) end
+function enmity.menu() enmity.write(commands.menu) end
 
-function enmity.elevator()
-    enmity.write(commands.elevator)
-end
-
-function enmity.killerPos()
-    enmity.write(commands.killerPos)
-end
-
-function enmity.cathedral()
-    enmity.write(commands.cathedral)
-end
-
-function enmity.emote()
-    enmity.write(commands.emote)
-end
-
-function enmity.menu()
-    enmity.write(commands.menu)
-end
--- The actual listener
+-- Listener
 function enmity.listener()
     if listener then return end
     listener = true
     task.spawn(function()
         while listener do
             task.wait(0.5)
-
             local data = read()
             if data then
                 execute(data)
@@ -161,4 +183,5 @@ function enmity.stopListener()
     enmity.write(commands.afk)
     listener = false
 end
+
 return enmity
