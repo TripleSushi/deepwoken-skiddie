@@ -28,11 +28,11 @@ end
 local function getKey(name)
     return KeyHandler.getKey(name)
 end
+Main()
+Gui()
 
 return {
     Client = Client,
     KeyHandler = KeyHandler,
-    GetKey = getKey,
-    Main = Main,
-    Gui = Gui
+    GetKey = getKey
 }
