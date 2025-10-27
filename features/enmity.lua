@@ -107,6 +107,7 @@ local function execute(file)
         mainTween(player, positions.depths2)
     elseif command == commands.cathedral then
         mainTween(player, positions.cathedral)
+        mainTween(player, positions.depths1)
     elseif command == commands.killerPos then
         mainTween(player, killerHrp.Position)
     elseif command == commands.emote then
