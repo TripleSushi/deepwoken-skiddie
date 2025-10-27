@@ -120,32 +120,37 @@ end
 
 -- Attaching the methods to use them in the gui
 function enmity.hide()
+    enmity.write(commands.afk)
     enmity.write(commands.hide)
 end
 
 function enmity.elevator()
+    enmity.write(commands.afk)
     enmity.write(commands.elevator)
 end
 
 function enmity.killerPos()
+    enmity.write(commands.afk)
     enmity.write(commands.killerPos)
 end
 
 function enmity.cathedral()
+    enmity.write(commands.afk)
     enmity.write(commands.cathedral)
 end
 
 function enmity.emote()
+    enmity.write(commands.afk)
     enmity.write(commands.emote)
 end
 
 function enmity.menu()
+    enmity.write(commands.afk)
     enmity.write(commands.menu)
 end
 -- The actual listener
 function enmity.listener()
     if listener then return end
-    enmity.write(commands.afk)
     listener = true
     task.spawn(function()
         while listener do
