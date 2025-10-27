@@ -282,7 +282,7 @@ local function searchForKeyHandlerData()
 end
 
 ---Initialize the KeyHandler module.
-KeyHandling.init = LPH_NO_VIRTUALIZE(function()
+function KeyHandling.init()
 	local retries = 0
 
 	while true do
@@ -312,12 +312,12 @@ KeyHandling.init = LPH_NO_VIRTUALIZE(function()
 		-- Wait.
 		task.wait(0.5)
 	end
-end)
+end
 
 ---Get remote from a specific remote name.
 ---@param remoteName string
 ---@return Instance|nil
-KeyHandling.getRemote = LPH_NO_VIRTUALIZE(function(remoteName)
+function KeyHandling.getRemote(remoteName)
 	if not randomTable and not remoteTable then
 		return nil
 	end
@@ -329,7 +329,7 @@ KeyHandling.getRemote = LPH_NO_VIRTUALIZE(function(remoteName)
 	end
 
 	return remoteTable[hashedRemoteName]
-end)
+end
 
 -- Return KeyHandling module.
 return KeyHandling
