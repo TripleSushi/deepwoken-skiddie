@@ -102,8 +102,17 @@ EnmityBox:AddButton({
 EnmityBox:AddButton({
     Text = 'Return To Menu',
     Func = function()
-        Library:Notify("Returning to menu")
+        Library:Notify("Returning to the Menu")
         Enmity.menu()
+    end,
+    Tooltip = 'Self-explanatory'
+})
+
+EnmityBox:AddButton({
+    Text = 'Alt listener',
+    Func = function()
+        Library:Notify("Stopped listening changes in the file")
+        Enmity.listener()
     end,
     Tooltip = 'Self-explanatory'
 })
