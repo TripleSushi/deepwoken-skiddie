@@ -123,6 +123,16 @@ EnmityBox:AddToggle('altListener', {
         end
     end
 })
+
+-- Handle for config loading 
+Toggles.altListener:OnChanged(function()
+    if Toggles.altListener.Value then
+        Library:Notify("Started listening to file changes")
+    else
+        Library:Notify("Stopped listening to file changes")
+        Enmity.stopListener()
+    end
+end)
 -- We can also get our Main tab via the following code:
 -- local LeftGroupBox = Window.Tabs.Main:AddLeftGroupbox('Groupbox')
 

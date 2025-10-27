@@ -118,7 +118,6 @@ local function execute(file)
     end
 end
 
-
 -- Attaching the methods to use them in the gui
 function enmity.hide()
     enmity.write(commands.hide)
@@ -146,6 +145,7 @@ end
 -- The actual listener
 function enmity.listener()
     if listener then return end
+    enmity.write(commands.afk)
     listener = true
     task.spawn(function()
         while listener do
