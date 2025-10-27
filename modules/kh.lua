@@ -262,7 +262,18 @@ end
 
 ---Search through 'getgc' for data.
 local function searchForKeyHandlerData()
-	for _, value in next, getgc(true) do
+	if not getgc then
+		warn("getgc function not available")
+		return false
+	end
+	
+	local success, gc = pcall(getgc, true)
+	if not success or not gc then
+		warn("Failed to get garbage collector data")
+		return false
+	end
+	
+	for _, value in next, gc do
 		searchForRandomTable(value)
 		searchForRemoteTable(value)
 	end
