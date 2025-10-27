@@ -113,44 +113,36 @@ local function execute(file)
     elseif command == commands.emote then
         event.Gesture:FireServer("Lean Back")
     elseif command == commands.menu then
-        enmity.write(commands.afk)
         event.ReturnToMenu:FireServer()
     end
 end
 
 -- Attaching the methods to use them in the gui
 function enmity.hide()
-    enmity.write(commands.afk)
     enmity.write(commands.hide)
 end
 
 function enmity.elevator()
-    enmity.write(commands.afk)
     enmity.write(commands.elevator)
 end
 
 function enmity.killerPos()
-    enmity.write(commands.afk)
     enmity.write(commands.killerPos)
 end
 
 function enmity.cathedral()
-    enmity.write(commands.afk)
     enmity.write(commands.cathedral)
 end
 
 function enmity.emote()
-    enmity.write(commands.afk)
     enmity.write(commands.emote)
 end
 
 function enmity.menu()
-    enmity.write(commands.afk)
     enmity.write(commands.menu)
 end
 -- The actual listener
 function enmity.listener()
-    enmity.write(commands.afk)
     if listener then return end
     listener = true
     task.spawn(function()
