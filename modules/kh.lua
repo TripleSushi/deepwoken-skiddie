@@ -1,4 +1,5 @@
 -- Credits to the thread author
+local kh = {}
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer 
 
@@ -127,5 +128,7 @@ local function getKey(name)
     end
     return remoteNode[hashedName]
 end
+
+return kh
 
 -- Credits to the thread author
