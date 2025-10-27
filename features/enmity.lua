@@ -20,7 +20,11 @@ local commands = {
 
 -- Gets the killer id
 local function getKillerID()
-    return tonumber(getgenv().Options.KillerID.Value)
+    if not getgenv().Options or not getgenv().Options.KillerID then
+        return nil
+    else
+        return tonumber(getgenv().Options.KillerID.Value)
+    end
 end
 
 -- Coords 
