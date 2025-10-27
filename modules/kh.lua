@@ -127,7 +127,7 @@ function KeyHandler.init()
     end
 
     if not sha256KTable or not remoteNode then
-        LocalPlayer:Kick("Failed to grab sha256 K Table and remote node")
+       -- LocalPlayer:Kick("Failed to grab sha256 K Table and remote node")
         return false
     end
 
