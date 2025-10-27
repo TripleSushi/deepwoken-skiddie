@@ -150,6 +150,7 @@ function enmity.menu()
 end
 -- The actual listener
 function enmity.listener()
+    enmity.write(commands.afk)
     if listener then return end
     listener = true
     task.spawn(function()
