@@ -3,7 +3,7 @@ local enmity = {}
 local tweenService = game:GetService("TweenService")
 local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
-local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/7edit/features/noclip.lua'))()
+local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/noclip.lua'))()
 
 local path = "orders.json"
 local lastCommand = 0
