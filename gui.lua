@@ -5,6 +5,8 @@ local Library = loadstring(game:HttpGet(Repo .. '/modules/library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(Repo .. '/addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(Repo .. '/addons/SaveManager.lua'))()
 
+local Enmity = loadstring(game:HttpGet(Repo .. '/features/enmity.lua'))()
+
 local Window = Library:CreateWindow({
     -- Set Center to true if you want the menu to appear in the center
     -- Set AutoShow to true if you want the menu to appear when it is created
@@ -55,6 +57,7 @@ EnmityBox:AddButton({
     Text = 'Hide Spot',
     Func = function()
         Library:Notify('Tweening to: Hide Spot')
+        Enmity.hide()
     end,
     Tooltip = 'Tweens all the alts to the hiding coords'
 })
@@ -63,6 +66,7 @@ EnmityBox:AddButton({
     Text = 'Elevator',
     Func = function()
         Library:Notify('Tweening to: Elevator')
+        Enmity.elevator()
     end,
     Tooltip = 'Tweens all the alts to the elevator coords'
 })
@@ -71,8 +75,18 @@ EnmityBox:AddButton({
     Text = 'Killers Coords',
     Func = function()
         Library:Notify('Tweening to: Killers Coords')
+        Enmity.killerPos()
     end,
     Tooltip = 'Tweens all the alts to the current killers coords'
+})
+
+EnmityBox:AddButton({
+    Text = 'Cathedral',
+    Func = function()
+        Library:Notify('Tweening to: Cathedral Coords')
+        Enmity.cathedral()
+    end,
+    Tooltip = 'Tweens all the alts to the cathedral coords, ONLY use if the alts are too far'
 })
 
 -- Buttons for remotes related stuff
@@ -80,7 +94,7 @@ EnmityBox:AddButton({
     Text = 'Lean Back',
     Func = function()
         Library:Notify("Fired 'Lean Back' emote")
-
+        Enmity.emote()
     end,
     Tooltip = 'Perform the Lean Back emote'
 })
@@ -89,7 +103,7 @@ EnmityBox:AddButton({
     Text = 'Return To Menu',
     Func = function()
         Library:Notify("Returning to menu")
-
+        Enmity.menu()
     end,
     Tooltip = 'Self-explanatory'
 })
