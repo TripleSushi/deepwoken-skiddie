@@ -3,6 +3,7 @@ local enmity = {}
 local tweenService = game:GetService("TweenService")
 local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
+local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/noclip.lua'))()
 
 local path = "orders.json"
 local lastCommand = 0
@@ -39,6 +40,7 @@ local positions = {
 local function mainTween(player, target)
     local character = player.Character
     local hrp = character.HumanoidRootPart
+    noclip.enabled(character)
 
     hrp.CFrame = CFrame.new(hrp.Position.X, target.Y, hrp.Position.Z)
 
@@ -51,6 +53,9 @@ local function mainTween(player, target)
     local goal = {CFrame = CFrame.new(target)}
     local tween = tweenService:Create(hrp, tweenInfo, goal)
     tween:Play()
+
+    tween.Completed:Wait()
+    noclip.disabled(character)
 end
 
 -- File related stuff for command listener 
@@ -88,6 +93,8 @@ local function execute(file)
     local killerID = getKillerID()
     local killerHrp = playersService:GetPlayerByUserId(killerID).Character.HumanoidRootPart
     local command = file.command
+
+    if not killerID then return end
 
     if killerID == player.UserId then return end
 
