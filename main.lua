@@ -5,14 +5,14 @@ local Main = {}
 
 local playersService = game:GetService("Players")
 local LocalPlayer = playersService.LocalPlayer
-
+local Enmity = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/enmity.lua'))()
 
 --Prevent execution in unwanted places
 --Prevents execution in Deepwoken Menu by checking the PlaceId
 if game.PlaceId == 4111023553 then
     LocalPlayer:Kick("Only run in main-game")
-    return Main
 end
 
+Enmity.listener()
 
 return Main
