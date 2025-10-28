@@ -14,7 +14,7 @@ if not success1 or _client == false then
 end
 
 local success2, err2 = pcall(function()
-    KeyHandler.init()
+    KeyHandling.init()
 end)
 
 if not success2 then
