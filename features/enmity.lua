@@ -113,6 +113,7 @@ local function execute(file)
     local killerID = getKillerID()
     if not killerID then return end
     local killerHrp = playersService:GetPlayerByUserId(killerID).Character.HumanoidRootPart
+    if not killerHrp then return end
     local command = file.command
 
     if killerID == player.UserId then return end
