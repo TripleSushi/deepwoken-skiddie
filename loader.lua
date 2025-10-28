@@ -23,7 +23,7 @@ if not success2 then
 end
 
 local function getKey(name)
-    return KeyHandler.getKey(name)
+    return KeyHandling.getKey(name)
 end
 
 local Main = loadstring(game:HttpGet(Repo .. "/main.lua"))()
