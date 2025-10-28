@@ -12,4 +12,4 @@ if game.PlaceId == 4111023553 then
     LocalPlayer:Kick("Only run in main-game")
 end
 
-return Main
+return Main 
