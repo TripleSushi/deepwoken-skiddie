@@ -48,31 +48,8 @@ local function mainTween(player, target)
 
     hrp.CFrame = CFrame.new(hrp.Position.X, target.Y, hrp.Position.Z)
 
-    local alts = {}
-    for _, p in pairs(playersService) do
-        if p.UserId ~= getKillerID() then
-            table.insert(alts, p.UserId)
-        end
-    end
-    table.sort(alts)
-
-    local total = #alts
-    local position = 0
-    for i, p in alts do
-        if p == playersService.LocalPlayer.UserId then
-            position = i
-            break
-        end
-    end
-
-    local spacing = total * 10
-    local r = spacing / (2 * math.pi)
-    local angle = (position / total) * (2 * math.pi)
-    local circleX = target.X + r * math.cos(angle)
-    local circleZ = target.Z + r * math.sin(angle)
-
     local start = hrp.Position
-    target = Vector3.new(circleX, hrp.Position.Y, circleZ)
+    target = Vector3.new(target.X, hrp.Position.Y, target.Z)
     local distance = (target - start).Magnitude
     local duration = distance / 57
 
@@ -106,6 +83,34 @@ local function isAreaSafe(range)
         end
     end
     return true
+end
+
+local function circle(center)
+    local alts = {}
+    for _, p in pairs(playersService) do
+        if p.UserId ~= getKillerID() then
+            table.insert(alts, p.UserId)
+        end
+    end
+    table.sort(alts)
+
+    local total = #alts
+    local position = 0
+    for i, p in alts do
+        if p == playersService.LocalPlayer.UserId then
+            position = i
+            break
+        end
+    end
+
+    local spacing = total * 10
+    local r = spacing / (2 * math.pi)
+    local angle = (position / total) * (2 * math.pi)
+    
+    local x = center.X + r * math.cos(angle)
+    local z = center.Z + r * math.sin(angle)
+
+    return Vector3.new(x, center.Y, z)
 end
 
 -- File related
@@ -173,7 +178,7 @@ local function execute(file)
         mainTween(player, positions.cathedral)
         mainTween(player, positions.depths1)
     elseif command == commands.killerPos then
-        mainTween(player, killerHrp.Position)
+        mainTween(player, circle(killerHrp))
     elseif command == commands.emote then
         event.Gesture:FireServer("Lean Back")
     elseif command == commands.menu then
