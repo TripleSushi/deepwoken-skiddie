@@ -133,6 +133,7 @@ EnmityBox:AddSlider('Spacing', {
     Default = 5,
     Min = 0,
     Max = 10,
+    Rounding = 1,
     Compact = false
 })
 -- We can also get our Main tab via the following code:
