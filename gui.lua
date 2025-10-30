@@ -125,6 +125,16 @@ Toggles.altListener:OnChanged(function()
         Enmity.stopListener()
     end
 end)
+
+EnmityBox:AddDivider()
+
+EnmityBox:AddSlider('Spacing', {
+    Text = 'Spacing between alts',
+    Default = 5,
+    Min = 0,
+    Max = 10,
+    Compact = false
+})
 -- We can also get our Main tab via the following code:
 -- local LeftGroupBox = Window.Tabs.Main:AddLeftGroupbox('Groupbox')
 

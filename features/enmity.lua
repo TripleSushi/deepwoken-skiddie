@@ -5,8 +5,6 @@ local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
 local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/noclip.lua'))()
 
---local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/library.lua'))()
-
 local path = "orders.json"
 local lastCommand = 0
 local listener = false
@@ -81,10 +79,10 @@ local function circle(center)
         end
     end
 
-    local spacing = total * 10
+    local spacing = total * getgenv().Options.Spacing.Value
     local r = spacing / (2 * math.pi)
     local angle = (position / total) * (2 * math.pi)
-    
+
     local x = center.X + r * math.cos(angle)
     local z = center.Z + r * math.sin(angle)
 
