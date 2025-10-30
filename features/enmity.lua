@@ -117,8 +117,13 @@ local function execute(file)
     local player = playersService.LocalPlayer
     local killerID = getKillerID()
     if not killerID then return end
-    local killerHrp = playersService:GetPlayerByUserId(killerID).Character.HumanoidRootPart
+
+    local killer = playersService:GetPlayerByUserId(killerID)
+    if not killer or not killer.Character then return end
+
+    local killerHrp = killer.Character:FindFirstChild("HumanoidRootPart")
     if not killerHrp then return end
+
     local command = file.command
 
     if killerID == player.UserId then return end
