@@ -29,7 +29,7 @@ function noclip.disabled(character)
 
     for _, v in character:GetDescendants() do
         if v:IsA("BasePart") then
-            v.CanCollide = true
+            v.CanCollide = ogCollisions[v]
         end
     end
     ogCollisions = {}
