@@ -5,7 +5,7 @@ local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
 local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/noclip.lua'))()
 
-local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/library.lua'))()
+--local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/library.lua'))()
 
 local path = "orders.json"
 local lastCommand = 0
@@ -61,29 +61,6 @@ local function mainTween(player, target)
 
     tween.Completed:Wait()
     noclip.disabled(character)
-end
-
--- Nearby player check
-local function isAreaSafe(range)
-    local player = playersService.LocalPlayer
-    local character = player.Character
-    if not character or not character:FindFirstChild("HumanoidRootPart") then
-        return true
-    end
-
-    local hrp = character.HumanoidRootPart
-    for _, other in ipairs(playersService:GetPlayers()) do
-        if other ~= player then
-            local otherChar = other.Character
-            if otherChar and otherChar:FindFirstChild("HumanoidRootPart") then
-                local dist = (hrp.Position - otherChar.HumanoidRootPart.Position).Magnitude
-                if dist <= range then
-                    return false
-                end
-            end
-        end
-    end
-    return true
 end
 
 local function circle(center)
@@ -149,26 +126,6 @@ local function execute(file)
     if killerID == player.UserId then return end
     if command == lastCommand then return end
     lastCommand = command
-
-    -- SAFETY CHECK BEFORE MOVEMENT (range now 275 studs)
-    if not isAreaSafe(275) then
-        if not unsafeConfirm then
-            unsafeConfirm = true
-            warn("[FOR ENMITY] Unsafe area detected — click again to confirm movement.")
-            if Library then
-                Library:Notify("⚠️ Unsafe area detected — click again to confirm movement.")
-            end
-            return
-        else
-            unsafeConfirm = false
-            warn("[FOR ENMITY] Confirmed movement despite unsafe area.")
-            if Library then
-                Library:Notify("Confirmed movement despite unsafe area.")
-            end
-        end
-    else
-        unsafeConfirm = false
-    end
 
     -- Command execution
     if command == commands.hide then
