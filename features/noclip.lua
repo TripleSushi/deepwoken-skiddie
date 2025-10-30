@@ -1,11 +1,18 @@
 local noclip = {}
 
 local RunService = game:GetService("RunService")
+local ogCollisions = {}
 local connection = nil
 
 function noclip.enabled(character)
+    for _, v in character:GetDescendants() then
+        if not v:IsA("BasePart") then
+            ogCollisions[v] = v.CanCollide
+        end
+    end
+
     connection = RunService.Stepped:Connect(function()
-        for _, v in pairs(character:GetDescendants()) do
+        for _, v in character:GetDescendants() do
             if not v:IsA("BasePart") then
                 continue
             end
@@ -20,11 +27,12 @@ function noclip.disabled(character)
         connection = nil
     end
 
-    for _, v in pairs(character:GetDescendants()) do
+    for _, v in character:GetDescendants() do
         if v:IsA("BasePart") then
             v.CanCollide = true
         end
     end
+    ogCollisions = {}
 end
 
 return noclip
