@@ -65,7 +65,7 @@ end
 
 local function circle(center)
     local alts = {}
-    for _, p in playersService do
+    for _, p in playersService:GetPlayers() do
         if p.UserId ~= getKillerID() then
             table.insert(alts, p.UserId)
         end
@@ -136,7 +136,7 @@ local function execute(file)
         mainTween(player, positions.cathedral)
         mainTween(player, positions.depths1)
     elseif command == commands.killerPos then
-        mainTween(player, circle(killerHrp))
+        mainTween(player, circle(killerHrp.Position))
     elseif command == commands.emote then
         event.Gesture:FireServer("Lean Back")
     elseif command == commands.menu then
