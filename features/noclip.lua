@@ -5,8 +5,8 @@ local ogCollisions = {}
 local connection = nil
 
 function noclip.enabled(character)
-    for _, v in character:GetDescendants() then
-        if not v:IsA("BasePart") then
+    for _, v in character:GetDescendants() do
+        if v:IsA("BasePart") then
             ogCollisions[v] = v.CanCollide
         end
     end
