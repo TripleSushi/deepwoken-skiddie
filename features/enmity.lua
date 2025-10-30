@@ -9,9 +9,6 @@ local path = "orders.json"
 local lastCommand = 0
 local listener = false
 
--- Track unsafe confirmations for movement
-local unsafeConfirm = false
-
 --Command values
 local commands = {
     afk = 0,
@@ -144,6 +141,10 @@ local function execute(file)
         event.Gesture:FireServer("Lean Back")
     elseif command == commands.menu then
         event.ReturnToMenu:FireServer()
+    end
+
+    if command ~= commands.afk then
+        enmity.write(commands.afk)
     end
 end
 
