@@ -5,8 +5,7 @@ local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
 local noclip = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/features/noclip.lua'))()
 
-local Repo = "https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main"
-local Library = loadstring(game:HttpGet(Repo .. '/modules/library.lua'))()
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/library.lua'))()
 
 local path = "orders.json"
 local lastCommand = 0
