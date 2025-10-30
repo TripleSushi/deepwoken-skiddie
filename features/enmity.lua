@@ -65,7 +65,7 @@ end
 
 local function circle(center)
     local alts = {}
-    for _, p in pairs(playersService) do
+    for _, p in playersService do
         if p.UserId ~= getKillerID() then
             table.insert(alts, p.UserId)
         end
