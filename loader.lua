@@ -1,7 +1,7 @@
-local Repo = "https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main"
+local Cache = loadstring(game:HttpGet("https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/cache.lua"))()
 
-local Client = loadstring(game:HttpGet(Repo .. "/modules/client.lua"))()
-local KeyHandling = loadstring(game:HttpGet(Repo .. "/modules/kh.lua"))()
+local Client = Cache.load("/modules/client.lua")
+local KeyHandling = Cache.load("/modules/kh.lua")
 
 local _client = false
 local success1, err1 = pcall(function()
@@ -26,8 +26,8 @@ local function getKey(name)
     return KeyHandling.getKey(name)
 end
 
-local Main = loadstring(game:HttpGet(Repo .. "/main.lua"))()
-local Gui = loadstring(game:HttpGet(Repo .. "/gui.lua"))()
+local Main = Cache.load("/main.lua")
+local Gui = Cache.load("/gui.lua")
 
 return {
     Client = Client,

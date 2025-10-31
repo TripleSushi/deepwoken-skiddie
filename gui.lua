@@ -1,11 +1,11 @@
 local gui = {}
 -- Credits to Inoria and whoever wrote the example.
-local Repo = "https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main"
-local Library = loadstring(game:HttpGet(Repo .. '/modules/library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(Repo .. '/addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(Repo .. '/addons/SaveManager.lua'))()
+local Cache = loadstring(game:HttpGet("https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/cache.lua"))()
+local Library = Cache.load('/modules/library.lua')
+local ThemeManager = Cache.load('/addons/ThemeManager.lua')
+local SaveManager = Cache.load('/addons/SaveManager.lua')
 
-local Enmity = loadstring(game:HttpGet(Repo .. '/features/enmity.lua'))()
+local Enmity = Cache.load('/features/enmity.lua')
 
 local Window = Library:CreateWindow({
     -- Set Center to true if you want the menu to appear in the center
