@@ -10,10 +10,6 @@ if tonumber(knowledge.Text) == 0 then
 end
 
 local function itemCount(itemName)
-    if not event then
-        return
-    end
-    
     local backpack = player:FindFirstChild("Backpack")
     local count = 0
     for _, item in backpack:GetChildren() do
@@ -25,6 +21,10 @@ local function itemCount(itemName)
 end
 
 local function depositItem(itemName)
+    if not event then
+        return
+    end
+    
     local count = itemCount(itemName)
     for i = 1, count do
         local item = player.Backpack:FindFirstChild(itemName)
