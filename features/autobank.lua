@@ -3,11 +3,6 @@ local autobank = {}
 local playersService = game:GetService("Players")
 local player = playersService.LocalPlayer
 local event = player.PlayerGui.BankGui.Choice
-local knowledge = player.PlayerGui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
-
-if tonumber(knowledge.Text) == 0 then
-    return
-end
 
 local function itemCount(itemName)
     local backpack = player:FindFirstChild("Backpack")
@@ -21,6 +16,11 @@ local function itemCount(itemName)
 end
 
 local function depositItem(itemName)
+    local knowledge = player.PlayerGui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
+
+    if tonumber(knowledge.Text) == 0 then
+        return
+    end
     if not event then
         return
     end
