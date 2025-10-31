@@ -144,7 +144,7 @@ AutobankBox:AddInput('CustomItem',{
     Default = '',
     Numeric = false,
     Finished = true,
-    Text = 'Bank custom item',
+    Text = 'Custom item',
     Tooltip = 'Type the FULL name of the item you want to bank',
     Callback = function(Value)
         Library:Notify('Selected item: ', Value)
