@@ -6,6 +6,7 @@ local ThemeManager = Cache.load('/addons/ThemeManager.lua')
 local SaveManager = Cache.load('/addons/SaveManager.lua')
 
 local Enmity = Cache.load('/features/enmity.lua')
+local Bank = Cache.load('/features/autobank.lua')
 
 local Window = Library:CreateWindow({
     -- Set Center to true if you want the menu to appear in the center
@@ -136,6 +137,51 @@ EnmityBox:AddSlider('Spacing', {
     Rounding = 1,
     Compact = false
 })
+-- Autobank stuff
+local AutobankBox = Tabs.Auto:AddRightGroupbox("Bank")
+
+AutobankBox:AddInput('CustomItem',{
+    Default = '',
+    Numeric = false,
+    Finished = true,
+    Text = 'Bank custom item',
+    Tooltip = 'Type the FULL name of the item you want to bank',
+    Callback = function(Value)
+        Library:Notify('Selected item: ', Value)
+    end
+})
+
+AutobankBox:AddDropdown('Relics', {
+    Values = {"Idol of Yun'Shul", "Armorer's Needle"},
+    Default = 1,
+    Multi = false,
+    Text = "Default items",
+    Tooltip = "A list of default items to bank, use the bank custom item if your item isnt here",
+    Callback = function(Value)
+        Library:Notify('Selected item: ', Value)
+    end
+})
+
+AutobankBox:AddToggle('AutoBank', {
+    Text = 'Bank selected item',
+    Default = false,
+    Tooltip = 'Self-explanatory'
+})
+
+-- Handle for load config
+Toggles.AutoBank:OnChanged(function()
+    if Toggles.AutoBank.Value then
+        local customItem = Options.CustomItem.Value
+        if customItem and customItem ~= '' then
+            Library:Notify('Banking item: ' .. customItem)
+            Bank.custom()
+        else
+            local relic = Options.Relics.Value
+            Library:Notify('Banking relic: ' .. relic)
+            Bank.relic()
+        end
+    end
+end)
 -- We can also get our Main tab via the following code:
 -- local LeftGroupBox = Window.Tabs.Main:AddLeftGroupbox('Groupbox')
 
