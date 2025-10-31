@@ -4,6 +4,11 @@ local playersService = game:GetService("Players")
 local player = playersService.LocalPlayer
 local event = player.PlayerGui.BankGui.Choice
 local customItem, relics = getgenv().Options.CustomItem.Value, getgenv().Options.Relics.Value
+local knowledge = player.PlayerGui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
+
+if tonumber(knowledge.Text == 0) then
+    return
+end
 
 if not event then
     return
