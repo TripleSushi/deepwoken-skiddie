@@ -9,11 +9,11 @@ if tonumber(knowledge.Text) == 0 then
     return
 end
 
-if not event then
-    return
-end
-
 local function itemCount(itemName)
+    if not event then
+        return
+    end
+    
     local backpack = player:FindFirstChild("Backpack")
     local count = 0
     for _, item in backpack:GetChildren() do
