@@ -144,13 +144,8 @@ local function execute(file)
         event.ReturnToMenu:FireServer()
     end
 
-    if command ~= commands.afk then
-        enmity.write(commands.afk)
-        local current = read()
-        if current and current.command == command then
-            enmity.write(commands.afk)
-        end
-    end
+    wait(0.1)
+    enmity.write(commands.afk)
 end
 
 -- GUI shortcuts
