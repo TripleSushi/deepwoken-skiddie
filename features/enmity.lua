@@ -4,7 +4,7 @@ local tweenService = game:GetService("TweenService")
 local playersService = game:GetService("Players")
 local event = game:GetService("ReplicatedStorage").Requests
 local Cache = loadstring(game:HttpGet("https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/main/modules/cache.lua"))()
-local noclip = Cache.load("/features/noclip.lua'")
+local noclip = Cache.load("/features/noclip.lua")
 
 local path = "orders.json"
 local lastCommand = 0
