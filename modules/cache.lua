@@ -3,7 +3,7 @@ local Repo = "https://raw.githubusercontent.com/TripleSushi/deepwoken-skiddie/ma
 
 local function load(path)
     local url = Repo .. path
-    warn("Loading: " .. url)
+    warn("Attempting to load: " .. url)
 
     if not getgenv().Cache[url] then
         local success, func = pcall(function()
