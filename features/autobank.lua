@@ -32,12 +32,14 @@ local function depositItem(itemName)
         local item = player.Backpack:FindFirstChild(itemName)
         if not item then break end
         event:FireServer("deposit", item)
-    end
-    local prompt = gui:FindFirstChild("ChoicePrompt")
-    if prompt then
-        local choice = prompt:FindFirstChild("Choice")
-        if choice then
-            choice:FireServer(true)
+
+        wait(0.5)
+        local prompt = gui:FindFirstChild("ChoicePrompt")
+        if prompt then
+            local choice = prompt:FindFirstChild("Choice")
+            if choice then
+                choice:FireServer(true)
+            end
         end
     end
 end
