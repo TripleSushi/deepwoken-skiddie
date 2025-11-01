@@ -13,6 +13,10 @@ local function depositItem(itemName)
     end
 
     while true do
+        if not getgenv().Toggles.AutoBank.Value then
+            break
+        end
+
         if tonumber(knowledge.Text) == 0 then
             break
         end
