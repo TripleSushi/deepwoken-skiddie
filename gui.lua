@@ -138,9 +138,9 @@ EnmityBox:AddSlider('Spacing', {
     Compact = false
 })
 -- Autobank stuff
-local AutobankBox = Tabs.Auto:AddRightGroupbox("Bank")
+local BankBox = Tabs.Auto:AddRightGroupbox("Bank")
 
-AutobankBox:AddInput('CustomItem',{
+BankBox:AddInput('CustomItem',{
     Default = '',
     Numeric = false,
     Finished = true,
@@ -151,7 +151,7 @@ AutobankBox:AddInput('CustomItem',{
     end
 })
 
-AutobankBox:AddDropdown('Relics', {
+BankBox:AddDropdown('Relics', {
     Values = {"Idol of Yun'Shul", "Armorer's Needle", "Sinner's Ash", "Moonseye Tome", "Smith's Alloy", "Gilded Needle", "Forge Needle"},
     Default = 1,
     Multi = false,
@@ -162,7 +162,7 @@ AutobankBox:AddDropdown('Relics', {
     end
 })
 
-AutobankBox:AddToggle('AutoBank', {
+BankBox:AddToggle('AutoBank', {
     Text = 'Bank selected item',
     Default = false,
     Tooltip = 'Self-explanatory'
@@ -181,7 +181,48 @@ Toggles.AutoBank:OnChanged(function()
             Bank.relic()
         end
     else
-        Library:Notify('Stopped autobank')
+        Library:Notify('Stopping autobank')
+    end
+end)
+
+-- Auto withdrawal
+local WithdrawalBox = Tabs.Auto:AddRightGroupbox("Auto-Withdrawal")
+
+WithdrawalBox:AddRightGroupbox('Withdrawal')
+
+BankBox:AddDropdown('WithdrawRelics', {
+    Values = {"Idol of Yun'Shul", "Armorer's Needle", "Sinner's Ash", "Moonseye Tome", "Smith's Alloy", "Gilded Needle", "Forge Needle"},
+    Default = 1,
+    Multi = false,
+    Text = "Default items",
+    Tooltip = "A list of default relics to withdraw",
+})
+
+WithdrawalBox:AddSlider('WQuantity', {
+    Text = 'Value of the quantity to withdraw',
+    Default = 1,
+    Min = 1,
+    Max = 25,
+    Rounding = 0,
+    Compact = false
+})
+
+WithdrawalBox:AddToggle('AutoWithdraw', {
+    Text = 'Withdraw the selected relic',
+    Default = false,
+    Tooltip = 'Self-explanatory'
+})
+
+-- Handle for load config
+Toggles.AutoWithdraw:OnChanged(function()
+    if Toggles.AutoWithdraw.Value then
+        local relics = Options.WithdrawRelics.Value
+        if relics then
+            Library:Notify('Withdrawing item: ' .. customItem)
+            Bank.withdrawal()
+        end
+    else
+        Library:Notify('Stopping auto-withdraw')
     end
 end)
 -- We can also get our Main tab via the following code:
