@@ -152,7 +152,7 @@ AutobankBox:AddInput('CustomItem',{
 })
 
 AutobankBox:AddDropdown('Relics', {
-    Values = {"Idol of Yun'Shul", "Armorer's Needle"},
+    Values = {"Idol of Yun'Shul", "Armorer's Needle", "Sinner's Ash", "Moonseye Tome", "Smith's Alloy", "Gilded Needle", "Forge Needle"},
     Default = 1,
     Multi = false,
     Text = "Default items",
