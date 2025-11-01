@@ -32,8 +32,8 @@ end
 
 -- Coords 
 local positions = {
-    depths1 = Vector3.new(3039.7001953125, -2352.10009765625, 1589.76611328125),
-    depths2 = Vector3.new(2968.79345703125, -2264.3369140625, 1574.746826171875),
+    depths1 = Vector3.new(2969.76318359375, -2352.10009765625, 1581.73486328125),
+    depths2 = Vector3.new(2967.27587890625, -2264.332763671875, 1585.617431640625),
     cathedral = Vector3.new(2979.63818359375, -996.689697265625, 1774.434814453125)
 }
 
@@ -130,9 +130,9 @@ local function execute(file)
 
     -- Command execution
     if command == commands.hide then
-        mainTween(player, positions.depths1)
+        mainTween(player, circle(positions.depths1))
     elseif command == commands.elevator then
-        mainTween(player, positions.depths2)
+        mainTween(player, circle(positions.depths2))
     elseif command == commands.cathedral then
         mainTween(player, positions.cathedral)
         mainTween(player, positions.depths1)
