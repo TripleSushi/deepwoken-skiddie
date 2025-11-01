@@ -3,17 +3,6 @@ local autobank = {}
 local playersService = game:GetService("Players")
 local player = playersService.LocalPlayer
 
-local function itemCount(itemName)
-    local backpack = player:FindFirstChild("Backpack")
-    local count = 0
-    for _, item in backpack:GetChildren() do
-        if item.Name == itemName then
-            count = count + 1
-        end
-    end
-    return count
-end
-
 local function depositItem(itemName)
     local gui = player:WaitForChild("PlayerGui")
     local event = gui.BankGui.Choice
@@ -23,23 +12,21 @@ local function depositItem(itemName)
         return
     end
 
-    local count = itemCount(itemName)
-    for i = 1, count do
+    while true do
         if tonumber(knowledge.Text) == 0 then
             break
         end
 
         local item = player.Backpack:FindFirstChild(itemName)
         if not item then break end
+
         event:FireServer("deposit", item)
 
         wait(0.8)
-        local prompt = gui:FindFirstChild("ChoicePrompt")
-        if prompt then
-            local choice = prompt:FindFirstChild("Choice")
-            if choice then
-                choice:FireServer(true)
-            end
+
+        local choice = gui:FindFirstChild("ChoicePrompt"):FindFirstChild("Choice")
+        if choice then
+            choice:FireServer(true)
         end
     end
 end
