@@ -25,7 +25,7 @@ local function depositItem(itemName)
         if not item then break end
 
         event:FireServer("deposit", item)
-
+        wait(0.5)
         local prompt = gui:WaitForChild("ChoicePrompt", 2)
         if prompt then
             local choice = prompt:FindFirstChild("Choice")
