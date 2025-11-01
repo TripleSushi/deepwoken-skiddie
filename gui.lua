@@ -180,6 +180,8 @@ Toggles.AutoBank:OnChanged(function()
             Library:Notify('Banking relic: ' .. relic)
             Bank.relic()
         end
+    else
+        Library:Notify('Stopped autobank')
     end
 end)
 -- We can also get our Main tab via the following code:
