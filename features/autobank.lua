@@ -15,27 +15,28 @@ local function itemCount(itemName)
 end
 
 local function depositItem(itemName)
-    local event = player.PlayerGui.BankGui.Choice
-    local knowledge = player.PlayerGui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
+    local gui = player:WaitForChild("PlayerGui")
+    local event = gui.BankGui.Choice
+    local knowledge = gui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
 
-    if tonumber(knowledge.Text) == 0 then
-        return
-    end
     if not event then
         return
     end
-    
+
     local count = itemCount(itemName)
     for i = 1, count do
+        if tonumber(knowledge.Text) == 0 then
+            break
+        end
+
         local item = player.Backpack:FindFirstChild(itemName)
         if not item then break end
         event:FireServer("deposit", item)
     end
     wait(0.2)
-    local gui = player:WaitForChild("PlayerGui")
     local prompt = gui:FindFirstChild("ChoicePrompt")
 
-    if prompt and prompt.Enabled == true then
+    if prompt == true then
         local choice = prompt:FindFirstChild("Choice")
         choice:FireServer(true)
     end
