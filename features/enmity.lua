@@ -144,7 +144,7 @@ local function execute(file)
         event.ReturnToMenu:FireServer()
     end
 
-    wait(0.1)
+    wait(0.5)
     enmity.write(commands.afk)
 end
 
