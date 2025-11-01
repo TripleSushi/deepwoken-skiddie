@@ -16,17 +16,15 @@ local function depositItem(itemName)
         if getgenv().Toggles.AutoBank.Value == false then
             break
         end
-        
+
         if tonumber(knowledge.Text) == 0 then
             break
         end
 
         local item = player.Backpack:FindFirstChild(itemName)
         if not item then break end
-        
-        event:FireServer("deposit", item)
 
-        wait(0.8)
+        event:FireServer("deposit", item)
 
         local prompt = gui:WaitForChild("ChoicePrompt", 2)
         if prompt then
@@ -36,6 +34,7 @@ local function depositItem(itemName)
             end
         end
     end
+    getgenv().Toggles.AutoBank:SetValue(false)
 end
 
 function autobank.custom()
