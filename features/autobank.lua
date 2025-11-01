@@ -33,7 +33,7 @@ local function depositItem(itemName)
         if not item then break end
         event:FireServer("deposit", item)
     end
-    wait(0.2)
+    wait(0.5)
     local prompt = gui:FindFirstChild("ChoicePrompt")
 
     if prompt == true then
