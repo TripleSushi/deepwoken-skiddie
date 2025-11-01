@@ -7,6 +7,7 @@ local function depositItem(itemName)
     local gui = player:WaitForChild("PlayerGui")
     local event = gui.BankGui.Choice
     local knowledge = gui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
+    local choice = gui:FindFirstChild("ChoicePrompt"):FindFirstChild("Choice")
 
     if not event then
         return
@@ -26,9 +27,8 @@ local function depositItem(itemName)
 
         event:FireServer("deposit", item)
 
-        wait(0.8)
+        wait(0.65)
 
-        local choice = gui:FindFirstChild("ChoicePrompt"):FindFirstChild("Choice")
         if choice then
             choice:FireServer(true)
         end
