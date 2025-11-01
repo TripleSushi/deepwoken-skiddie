@@ -7,30 +7,33 @@ local function depositItem(itemName)
     local gui = player:WaitForChild("PlayerGui")
     local event = gui.BankGui.Choice
     local knowledge = gui.CurrencyGui.CurrencyFrame.ShrinePoints.Amount
-    local choice = gui:FindFirstChild("ChoicePrompt"):FindFirstChild("Choice")
 
     if not event then
         return
     end
 
     while true do
-        if not getgenv().Toggles.AutoBank.Value then
+        if getgenv().Toggles.AutoBank.Value == false then
             break
         end
-
+        
         if tonumber(knowledge.Text) == 0 then
             break
         end
 
         local item = player.Backpack:FindFirstChild(itemName)
         if not item then break end
-
+        
         event:FireServer("deposit", item)
 
-        wait(0.65)
+        wait(0.8)
 
-        if choice then
-            choice:FireServer(true)
+        local prompt = gui:WaitForChild("ChoicePrompt", 2)
+        if prompt then
+            local choice = prompt:FindFirstChild("Choice")
+            if choice then
+                choice:FireServer(true)
+            end
         end
     end
 end
