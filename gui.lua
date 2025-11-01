@@ -216,7 +216,7 @@ Toggles.AutoWithdraw:OnChanged(function()
     if Toggles.AutoWithdraw.Value then
         local relics = Options.WithdrawRelics.Value
         if relics then
-            Library:Notify('Withdrawing item: ' .. customItem)
+            Library:Notify('Withdrawing item: ' .. relics)
             Bank.withdrawal()
         end
     else
